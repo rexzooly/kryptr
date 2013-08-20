@@ -55,6 +55,8 @@ if(!isset($_REQUEST['apicall'])){
 				}else{
 					ReturnPrint($K_Return, 'We was unable to find '.strtolower($_REQUEST['user']).' in our database', '1');
 				}
+			}else{
+				echo ReturnPrint($K_Return, 'We are sorry the action you have requested is not loged in out system please check your connection string and data requests and try again.', '1');
 			}
 		}
 	}
@@ -64,11 +66,13 @@ if(!isset($_REQUEST['apicall'])){
 function ReturnPrint($Mode='html', $e_msg='', $pass='0'){
 	//Return as Text (text, t, txt)
 	if($Mode == 'txt' || $Mode == 'text' || $Mode == 't'){
-		echo 'pass:'.$pass.',return:'.$e_msg;
+		header("Content-Type: text/plain");
+		die('pass:'.$pass.',return:'.$e_msg);
 	}
 	//Return As Json (json, j)
 	if($Mode == 'json' || $Mode == 'j'){
-		echo json_encode(array('pass'=>$pass,'return'=>$e_msg));
+		header('Content-type: application/json');
+		die(json_encode(array('pass'=>$pass,'return'=>$e_msg)));
 	}
 	//Return As HTML (html, h)
 	if($Mode == 'html'|| $Mode == 'h'){
@@ -79,6 +83,7 @@ function ReturnPrint($Mode='html', $e_msg='', $pass='0'){
 			$PassWrd = 'Requessed Failed';
 			$info = 'alert-error';
 		}
+		header('Content-Type: text/html; charset=utf-8');
 		include 'html/header.php';
 		echo '<div class="row-fluid">
 			<h4>' . $PassWrd . '</h4>
@@ -88,6 +93,7 @@ function ReturnPrint($Mode='html', $e_msg='', $pass='0'){
 			</div>
 		</div>';
 		include 'html/footer.php';
+		return;
 	}
 }
 function checkuser($k_name){

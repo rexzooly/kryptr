@@ -1,15 +1,8 @@
 <?php
-if(isset($_REQUEST['apicall'])){
-	$ThisCall = '/?apicall='.$_REQUEST['apicall'].'&s';	
-}else{
-	$ThisCall = '/?s';	
-}
 echo'
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
+    <title>Kryptr</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -22,11 +15,6 @@ echo'
 </head>
 <body>
 	<div class="container">
-		<ul class="nav nav-pills pull-right">
-			<li><a href="' . $ThisCall . '=t">TXT</a></li>
-			<li><a href="' . $ThisCall . '=j">JSON</a></li>
-			<li class="active"><a href="#">HTML</a></li>
-		</ul>
 		<h3 class="muted">Kryptr</h3>
 		<hr />';
 ?>
