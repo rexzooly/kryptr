@@ -64,19 +64,16 @@ function ReturnPrint($Mode='html', $e_msg='', $pass='0'){
 	}
 }
 function checkuser($k_name){
-	if(K_Mode == 'DB-i'){
-		
+	if(K_Mode == 'DBi'){
+		include('mysqli_plugin.php');
 	}
-	if(K_Mode == 'DB-PDO'){
-		
+	if(K_Mode == 'DBp'){
+		include('pdo_plugin.php');
 	}
 	if(K_Mode == 'FF'){
-		if(file_exists('data/'.strtolower($_REQUEST['user']))){
-			return true;
-		}else{
-			return false;
-		}
+		include('flatfile_plugin.php');
 	}
+	return usercheck($k_name);
 }
 
 //PDO Connection
