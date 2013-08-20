@@ -11,3 +11,7 @@ We aim to offer means so the end service can offer this without braking there
 host rules, meaning been able to run a chat service on a shared host.
 
 We aim to offer direct messaging encryption.
+
+###More
+After we started this project we was able to see the Kryptr API could be used for other things
+so we will be includeding some examples so you can use the API for other programs.
