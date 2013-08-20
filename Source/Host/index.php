@@ -7,7 +7,7 @@
 #                                                                                                 #
 ###################################################################################################
 #Version: 0.0.0.0
-#Last Updated 12:22pm(GTM) 20/08/2013(UK)
+#Last Updated 12:02pm(GTM) 20/08/2013(UK)
 #Author: Rexzooly Kai Black
 #Advisor: Shadow(Shadiku)
 
@@ -31,14 +31,12 @@ $CallPool = array(
 	'mode'=>array('json', 'j', 'html', 'h', 'txt', 'text', 't')
 );
 
-//Chec Style/Mode
+//Check Style/Mode
 if(isset($_REQUEST['s'])){
-	if(in_array($_REQUEST['s'], $CallPool['mode'])){
-		$K_Return = $_REQUEST['s'];
+	if(in_array(strtolower($_REQUEST['s']), $CallPool['mode'])){
+		$K_Return = strtolower($_REQUEST['s']);
 	}
 }
-
-
 //Check is the apicall was made
 if(!isset($_REQUEST['apicall'])){
 	echo '<strong>API Request:</strong><br />&nbsp;&nbsp;&nbsp;&nbsp;None/Missing<br /><strong>Server:</strong><br />&nbsp;&nbsp;&nbsp;&nbsp;We are sorry the action you have requested is not loged in out system please check your connection string and data requests and try again.';
@@ -52,16 +50,33 @@ if(!isset($_REQUEST['apicall'])){
 		}
 	}
 }
+
 //Placeholder functions for later use.
 function ReturnPrint($Mode='html', $e_msg='', $pass='0'){
-	if($Mode == 'html'|| $Mode == 'h'){
-		return 'html';
+	//Return as Text (text, t, txt)
+	if($Mode == 'txt' || $Mode == 'text' || $Mode == 't'){
+		return 'pass:'.$pass.',return:'.$e_msg;
 	}
+	//Return As Json (json, j)
 	if($Mode == 'json' || $Mode == 'j'){
 		return json_encode(array('pass'=>$pass,'return'=>$e_msg));
 	}
-	if($Mode == 'txt' || $Mode == 'text' || $Mode == 't'){
-		return 'text';
+	//Return As HTML (html, h)
+	if($Mode == 'html'|| $Mode == 'h'){
+		if($pass == '0'){
+			$PassWrd = 'Requessed Passed';
+		}else{
+			$PassWrd = 'Requessed Failed';
+		}
+		include 'html/header.php';
+		echo '<div class="row-fluid">
+			<h4>' . $PassWrd . '</h4>
+			<div class="alert alert-info">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				' . $e_msg . '
+			</div>
+		</div>';
+		include 'html/footer.php';
 	}
 }
 ?>
