@@ -50,7 +50,7 @@ if(!isset($_REQUEST['apicall'])){
 		}
 		if($_REQUEST['apicall'] == 'check'){
 			if(isset($_REQUEST['user'])){
-				if(file_exists('data/'.strtolower($_REQUEST['user']))){
+				if(checkuser($_REQUEST['user'])){
 					ReturnPrint($K_Return, strtolower($_REQUEST['user']).' was found.');
 				}else{
 					ReturnPrint($K_Return, 'We was unable to find '.strtolower($_REQUEST['user']).' in our database', '1');
@@ -64,11 +64,11 @@ if(!isset($_REQUEST['apicall'])){
 function ReturnPrint($Mode='html', $e_msg='', $pass='0'){
 	//Return as Text (text, t, txt)
 	if($Mode == 'txt' || $Mode == 'text' || $Mode == 't'){
-		return 'pass:'.$pass.',return:'.$e_msg;
+		echo 'pass:'.$pass.',return:'.$e_msg;
 	}
 	//Return As Json (json, j)
 	if($Mode == 'json' || $Mode == 'j'){
-		return json_encode(array('pass'=>$pass,'return'=>$e_msg));
+		echo json_encode(array('pass'=>$pass,'return'=>$e_msg));
 	}
 	//Return As HTML (html, h)
 	if($Mode == 'html'|| $Mode == 'h'){
@@ -95,7 +95,19 @@ function checkuser($k_name){
 		
 	}
 	if(K_Mode == 'FF'){
-		
+		if(file_exists('data/'.strtolower($_REQUEST['user']))){
+			return true;
+		}else{
+			return false;
+		}
 	}
+}
+
+//PDO Connection
+function kPDOon(){
+
+}
+function kPDOoff(){
+
 }
 ?>
