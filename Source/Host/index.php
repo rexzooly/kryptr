@@ -6,31 +6,11 @@
 #                                                                                                 #
 #                                                                                                 #
 ###################################################################################################
-#Version: 0.0.0.0
-#Last Updated 20:04pm(GTM) 20/08/2013(UK)
+#Version: 0.0.0.1
+#Last Updated 20:31pm(GTM) 20/08/2013(UK)
 #Author: Rexzooly Kai Black
 #Advisor: Shadow(Shadiku)
-
-//Host Name, many hosts by default is set as localhost
-define('K_Host', 'localhost');
-//Database Name.
-define('K_Name', '');
-//Database Username.
-define('K_User', '');
-//Database Password.
-define('K_Auth', '');
-//API mode DB for Database mode, FF for Flat File Mode.
-define('K_Mode', 'FF');
-//API Return Mode JSON or HTML can be over ridden with &s=json, &s=html or $s=txt, if you set a invalied s it will default to html
-$K_Return = 'html';
-//Here we define the apicall pool
-$CallPool = array(
-	//The API Call List
-	'call' => array('ip', 'check', 'login', 'myip'),
-	//The API Style List
-	'mode'=>array('json', 'j', 'html', 'h', 'txt', 'text', 't')
-);
-
+include('config/config.php');
 //Check Style/Mode
 if(isset($_REQUEST['s'])){
 	if(in_array(strtolower($_REQUEST['s']), $CallPool['mode'])){
