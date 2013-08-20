@@ -1,3 +1,10 @@
+<?php
+if(isset($_REQUEST['apicall'])){
+	$ThisCall = '/?apicall='.$_REQUEST['apicall'].'&s';	
+}else{
+	$ThisCall = '/?s';	
+}
+echo'
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,7 +23,10 @@
 <body>
 	<div class="container">
 		<ul class="nav nav-pills pull-right">
+			<li><a href="' . $ThisCall . '=t">TXT</a></li>
+			<li><a href="' . $ThisCall . '=j">JSON</a></li>
 			<li class="active"><a href="#">HTML</a></li>
 		</ul>
 		<h3 class="muted">Kryptr</h3>
-		<hr />
+		<hr />';
+?>

@@ -39,10 +39,10 @@ if(isset($_REQUEST['s'])){
 }
 //Check is the apicall was made
 if(!isset($_REQUEST['apicall'])){
-	echo '<strong>API Request:</strong><br />&nbsp;&nbsp;&nbsp;&nbsp;None/Missing<br /><strong>Server:</strong><br />&nbsp;&nbsp;&nbsp;&nbsp;We are sorry the action you have requested is not loged in out system please check your connection string and data requests and try again.';
+	echo ReturnPrint($K_Return, 'We are sorry the action you have requested is not loged in out system please check your connection string and data requests and try again.', '1');
 }else{
 	if(!in_array($_REQUEST['apicall'], $CallPool['call'])){
-		echo '<strong>API Request:</strong><br />&nbsp;&nbsp;&nbsp;&nbsp;' . $_REQUEST['apicall'] . '<br /><strong>Server:</strong><br />&nbsp;&nbsp;&nbsp;&nbsp;We are sorry the action you have requested is not loged in out system please check your connection string and data requests and try again.';
+		echo ReturnPrint($K_Return, 'We are sorry the action you have requested is not loged in out system please check your connection string and data requests and try again.', '1');
 	}else{
 		//This Option is just for tested and for another project I am working on, I will leave it in for testing.
 		if($_REQUEST['apicall'] == 'myip'){
@@ -65,13 +65,15 @@ function ReturnPrint($Mode='html', $e_msg='', $pass='0'){
 	if($Mode == 'html'|| $Mode == 'h'){
 		if($pass == '0'){
 			$PassWrd = 'Requessed Passed';
+			$info = 'alert-info';
 		}else{
 			$PassWrd = 'Requessed Failed';
+			$info = 'alert-error';
 		}
 		include 'html/header.php';
 		echo '<div class="row-fluid">
 			<h4>' . $PassWrd . '</h4>
-			<div class="alert alert-info">
+			<div class="alert ' . $info . '">
 				<button type="button" class="close" data-dismiss="alert">&times;</button>
 				' . $e_msg . '
 			</div>
